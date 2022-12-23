@@ -1,0 +1,48 @@
+def  Promote():
+    Id = input("Enter Employee Id: ")
+    print("                         *************************")
+    print("                         -->> PROMOTE EMPLOYEE<<--")
+    print("                         *************************")
+    print("1. To Update Post")
+    print("2. To Update Salary")
+    
+    ah=int(input("Enter  the operation: "))
+    if ah==1:
+        post=input("Enter the New Post of the Employee:")
+        sql = 'select Post from empdata where Id=%s'
+        data=(Id,)
+        c=dataBase.cursor()
+        c.execute(sql,data)
+        r = c.fetchone()
+        t=post
+        sql = 'update empdata set Post = %s where Id = %s'
+        d = (t, Id)
+
+        c.execute(sql, d)
+        
+    elif ah==2:
+        Amount  = int(input("Enter Increase Salary: "))
+    
+        sql = 'select Salary from empdata where Id=%s'
+        data = (Id,)
+        c = dataBase.cursor()
+        
+       
+        c.execute(sql,data)
+        
+        
+        r = c.fetchone()
+        t = r[0]+Amount
+        
+        sql = 'update empdata set Salary = %s where Id = %s'
+        d = (t, Id)
+
+        c.execute(sql, d)
+
+    
+
+    dataBase.commit()
+    print("Employee Promoted")
+    press = input("Press Any key To continue..")
+    menu()
+    
